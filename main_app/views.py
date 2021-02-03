@@ -16,7 +16,8 @@ def users_index(request):
 
 def users_detail(request, user_id):
   user = User.objects.get(id=user_id)
-  return render(request, 'users/detail.html', { 'user': user })
+  profile = Profile.objects.get(user=user_id)
+  return render(request, 'users/detail.html', { 'user': user, 'profile': profile })
 
 def signup(request):
   error_message = ''
