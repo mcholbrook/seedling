@@ -14,6 +14,10 @@ def users_index(request):
   users = User.objects.all()
   return render(request, 'users/index.html', {'users': users})
 
+def users_detail(request, user_id):
+  user = User.objects.get(id=user_id)
+  return render(request, 'users/detail.html', { 'user': user })
+
 def signup(request):
   error_message = ''
   if request.method == 'POST':
