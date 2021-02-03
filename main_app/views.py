@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
-from .models import Profile
+from .models import Profile, User
 from .forms import UserForm
 # Create your views here.
 
@@ -37,3 +37,7 @@ class ProfileCreate(CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
+
+def users_index(request):
+  users = User.objects.all()
+  return render(request, 'users/index.html', {'users': users})
