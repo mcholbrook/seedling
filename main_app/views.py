@@ -3,12 +3,16 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
-from .models import Profile, User
+from .models import Profile, User, Seed
 from .forms import UserForm
 # Create your views here.
 
 def home(request):
   return render(request, 'home.html')
+
+def users_index(request):
+  users = User.objects.all()
+  return render(request, 'users/index.html', {'users': users})
 
 def signup(request):
   error_message = ''
@@ -31,13 +35,10 @@ def signup(request):
 
 class ProfileCreate(CreateView):
   model = Profile
-  fields = ['bio', 'photo']
+  fields = ['bio', 'photo', 'zone']
   success_url = '/'
 
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-def users_index(request):
-  users = User.objects.all()
-  return render(request, 'users/index.html', {'users': users})
