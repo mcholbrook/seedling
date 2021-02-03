@@ -2,7 +2,6 @@
 
 {% block content %}
 <h1>Home</h1>
-<p>This is a test</p>
 {% if user.is_authenticated %}
 <p>Hello {{user.username}}</p>
 <a href="{% url 'logout' %}">Log Out</a>

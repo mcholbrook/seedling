@@ -5,7 +5,7 @@ from datetime import date
 # Create your models here.
 
 class Profile(models.Model):
-  name = models.CharField(max_length=50)
+  name = models.CharField('What should we call you?', max_length=50)
   bio = models.TextField(max_length=200, blank=True)
   photo = models.CharField(max_length=200, blank=True)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
