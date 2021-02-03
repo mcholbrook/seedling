@@ -5,9 +5,9 @@ from datetime import date
 # Create your models here.
 
 class Profile(models.Model):
-  name = models.CharField('What should we call you?', max_length=50)
   bio = models.TextField(max_length=200, blank=True)
   photo = models.CharField(max_length=200, blank=True)
+  zone = models.CharField('What gardening zone are you in?', max_length=15, blank=True)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
