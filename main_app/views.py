@@ -31,7 +31,7 @@ def signup(request):
 
 class ProfileCreate(CreateView):
   model = Profile
-  fields = ['name', 'bio', 'photo']
+  fields = ['bio', 'photo']
   success_url = '/'
 
   def form_valid(self, form):
