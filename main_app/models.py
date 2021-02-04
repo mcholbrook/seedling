@@ -17,7 +17,7 @@ class Profile(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f"Profile for user: {self.name} at user_id {self.user_id}."
+    return f"Profile for user: {self.user.first_name} at user_id {self.user_id}."
 
 class Seed(models.Model):
   name = models.CharField(max_length=100)
