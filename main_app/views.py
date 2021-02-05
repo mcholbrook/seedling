@@ -92,3 +92,7 @@ def add_note(request, seed_id):
     new_note.user_id = request.user.id
     new_note.save()
   return redirect('seeds_detail', seed_id=seed_id)
+
+def save_seed(request, seed_id, user_id):
+  Seed.objects.get(id=seed_id).users.add(user_id)
+  return redirect('seeds_detail', seed_id=seed_id)
