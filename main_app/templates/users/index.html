@@ -4,8 +4,8 @@
 <h1>
   User Index
 </h1>
-{% for user in users %}
-<a href="{% url 'users_detail' user.id %}">{{user.first_name}}</a>
+{% for userName in users %}
+<a href="{% url 'users_detail' userName.id %}">{{userName.first_name}}</a>
 {% endfor %}
 
 {% endblock %}

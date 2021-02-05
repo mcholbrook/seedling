@@ -14,12 +14,21 @@ def home(request):
 
 def users_index(request):
   users = User.objects.all()
+  print(users)
   return render(request, 'users/index.html', {'users': users})
 
-def users_detail(request, user_id):
-  user = User.objects.get(id=user_id)
-  profile = Profile.objects.get(user=user_id)
-  return render(request, 'users/detail.html', { 'user': user, 'profile': profile })
+def users_detail(request, userName_id):
+  userWhoOwnsProfile = User.objects.get(id=userName_id)
+  profile = Profile.objects.get(user=userName_id)
+  return render(request, 'users/detail.html', { 'userAssociatedWithProfile': userWhoOwnsProfile, 'profile': profile })
+
+def add_friend(request, profile_id, otheruser_id):
+  friend = Profile.objects.get(id=profile_id)
+  currentUser = Profile.objects.get(user_id=otheruser_id)
+  print(friend)
+  print(currentUser)
+  currentUser.friends.add(friend)
+  return redirect('users_detail', userName_id=friend.user_id)
 
 def signup(request):
   error_message = ''
