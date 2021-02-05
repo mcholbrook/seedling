@@ -41,7 +41,7 @@ class Seed(models.Model):
     default=CARD_CHOICES[0][0]
   )
   description = models.TextField(max_length=300, blank=True)
-  user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+  users = models.ManyToManyField(User)
 
   def __str__(self):
     return f"{self.name} seed, type {self.get_kind_display()}"

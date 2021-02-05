@@ -66,7 +66,9 @@ def seed_create(request):
   form = SeedCreateForm(request.POST)
   context = {'form': form}
   if form.is_valid():
-    form.save()
+    new_seed = form.save()
+    print(new_seed.id)
+    Seed.objects.get(id=new_seed.id).users.add(request.user)
     return redirect('/seeds/')
   # context['form']= form
   return render(request, 'main_app/seed_form.html', context)
