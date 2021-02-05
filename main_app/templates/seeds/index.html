@@ -4,7 +4,8 @@
 <h1>Seed Index</h1>
 
 {% for seed in seeds %}
-<p>{{seed.name}}</p>
+
+<a href={% url 'seeds_detail' seed.id %}><p>{{seed.name}}</p></a>
 <img src="../../static/images/{{seed.kind}}.png"/>
 
 {% endfor %}

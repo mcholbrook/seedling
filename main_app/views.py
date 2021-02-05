@@ -75,3 +75,7 @@ def seed_create(request):
 def seed_list(request):
   seeds = Seed.objects.all()
   return render(request, 'seeds/index.html', {'seeds': seeds})
+
+def seeds_detail(request, seed_id):
+  seed = Seed.objects.get(id=seed_id)
+  return render(request, 'seeds/detail.html', {'seed': seed,})
