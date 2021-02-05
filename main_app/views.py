@@ -87,7 +87,8 @@ def add_note(request, seed_id):
   form = NoteCreateForm(request.POST)
   if form.is_valid():
     new_note = form.save(commit=False)
-    new_note.seed = seed_id
-    new_note.user_id = request.user
+    print(new_note)
+    new_note.seed_id = seed_id
+    new_note.user_id = request.user.id
     new_note.save()
   return redirect('seeds_detail', seed_id=seed_id)

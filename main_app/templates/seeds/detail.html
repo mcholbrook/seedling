@@ -10,4 +10,9 @@
   {{ note_form.as_p}}
   <input type="submit" class="btn btn-success" value="Add Note">
 </form>
+{% for note in seed.note_set.all %}
+{{note.date}}
+{{note.content}}
+{{note.user.username}}
+{% endfor %}
 {% endblock %}
