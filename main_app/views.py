@@ -4,10 +4,12 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
 from .models import Profile, User, Seed
-from .forms import UserForm
+from .forms import UserForm, SeedCreateForm
+from PIL import Image
 # Create your views here.
 
 def home(request):
+  # chamomile = Image.open('.static/images/chamomile.png')
   return render(request, 'home.html')
 
 def users_index(request):
@@ -46,4 +48,26 @@ class ProfileCreate(CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
+
+# class SeedCreate(CreateView):
+#   model = Seed
+#   fields = ['name', 'scientific_name', 'kind', 'description']
+#   success_url = '/'
+
+def SeedCreate(request):
+  CARD_CHOICES = (
+  ('Flower', 'Flower'),
+  ('Herb', 'Herb')
+  )
+  print(Seed.kind)
+  # kindlist = []
+  # for choice in CARD_CHOICES:
+  #   kindlist.append(choice[0])
+  form = SeedCreateForm(request.POST)
+  context = {'form': form}
+  if form.is_valid():
+    form.save()
+    return redirect('/')
+  # context['form']= form
+  return render(request, 'main_app/seed_form.html', context)
 

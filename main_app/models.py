@@ -10,6 +10,19 @@ PRODUCE = (
   ('FL', 'Flower')
 )
 
+# FLOWER = 'Flower'
+# HERB = 'Herb'
+
+CARD_CHOICES = [
+  ( 'FLOWER', 'Flower'),
+  ('HERB', 'Herb')
+]
+
+# CARD_CHOICES = (
+#   ('Flower', '../../static/images/Flower.png'),
+#   ('Herb', '../../static/images/Herb.png')
+# )
+
 class Profile(models.Model):
   bio = models.TextField(max_length=200, blank=True)
   photo = models.CharField(max_length=200, blank=True)
@@ -23,9 +36,9 @@ class Seed(models.Model):
   name = models.CharField(max_length=100)
   scientific_name = models.CharField('Scientific Name, if applicable', max_length=100, blank=True)
   kind = models.CharField(
-    max_length=2,
-    choices=PRODUCE,
-    default=PRODUCE[0][0]
+    max_length=500,
+    choices=CARD_CHOICES,
+    default=CARD_CHOICES[0][0]
   )
   description = models.TextField(max_length=300, blank=True)
   user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
