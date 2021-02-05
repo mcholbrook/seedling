@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Profile, Seed
+from .models import Profile, Seed, Note
 # Register your models here.
 admin.site.register(Profile)
 admin.site.register(Seed)
+admin.site.register(Note)

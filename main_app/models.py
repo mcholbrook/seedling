@@ -45,3 +45,12 @@ class Seed(models.Model):
 
   def __str__(self):
     return f"{self.name} seed, type {self.get_kind_display()}"
+
+class Note(models.Model):
+  date = models.DateField()
+  content = models.TextField(max_length=500)
+  seed = models.ForeignKey(Seed, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f"{self.seed} note by {self.user.username} on {self.date}"
