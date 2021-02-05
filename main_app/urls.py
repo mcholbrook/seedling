@@ -10,4 +10,5 @@ urlpatterns = [
   path('seeds/create', views.seed_create, name='seeds_create'),
   path('seeds/', views.seed_list, name='seeds_list'),
   path('seeds/<int:seed_id>/', views.seeds_detail, name='seeds_detail'),
+  path('seeds/<int:seed_id>/addnote/', views.add_note, name='add_note'),
 ]

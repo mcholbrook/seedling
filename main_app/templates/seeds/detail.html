@@ -4,4 +4,10 @@
 <h1>{{seed.name}}</h1>
 <p>{{seed.description}}</p>
 <img src="../../static/images/{{seed.kind}}.png" />
+
+<form action="{% url 'add_note' seed.id %}" method="post">
+  {% csrf_token %}
+  {{ note_form.as_p}}
+  <input type="submit" class="btn btn-success" value="Add Note">
+</form>
 {% endblock %}

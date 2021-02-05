@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
-from .models import Profile, User, Seed
-from .forms import UserForm, SeedCreateForm
+from .models import Profile, User, Seed, Note
+from .forms import UserForm, SeedCreateForm, NoteCreateForm
 from PIL import Image
 # Create your views here.
 
@@ -80,4 +80,14 @@ def seed_list(request):
 
 def seeds_detail(request, seed_id):
   seed = Seed.objects.get(id=seed_id)
-  return render(request, 'seeds/detail.html', {'seed': seed,})
+  note_form = NoteCreateForm()
+  return render(request, 'seeds/detail.html', {'seed': seed, 'note_form': note_form})
+
+def add_note(request, seed_id):
+  form = NoteCreateForm(request.POST)
+  if form.is_valid():
+    new_note = form.save(commit=False)
+    new_note.seed = seed_id
+    new_note.user_id = request.user
+    new_note.save()
+  return redirect('seeds_detail', seed_id=seed_id)
