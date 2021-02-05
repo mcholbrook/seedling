@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Seed Index</h1>
+
+{% for seed in seeds %}
+<p>{{seed.name}}</p>
+<img src="../../static/images/{{seed.kind}}.png"/>
+
+{% endfor %}
+
+{% endblock %}

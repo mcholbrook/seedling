@@ -20,6 +20,8 @@
           {% if user.is_authenticated %}
           <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'users_index' %}">All Users</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'seeds_create' %}">Add Seeds</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'seeds_list' %}">All Seeds</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
           <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>

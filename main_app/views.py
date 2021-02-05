@@ -54,7 +54,7 @@ class ProfileCreate(CreateView):
 #   fields = ['name', 'scientific_name', 'kind', 'description']
 #   success_url = '/'
 
-def SeedCreate(request):
+def seed_create(request):
   CARD_CHOICES = (
   ('Flower', 'Flower'),
   ('Herb', 'Herb')
@@ -67,7 +67,11 @@ def SeedCreate(request):
   context = {'form': form}
   if form.is_valid():
     form.save()
-    return redirect('/')
+    return redirect('/seeds/')
   # context['form']= form
   return render(request, 'main_app/seed_form.html', context)
 
+
+def seed_list(request):
+  seeds = Seed.objects.all()
+  return render(request, 'seeds/index.html', {'seeds': seeds})
