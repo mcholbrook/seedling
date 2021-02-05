@@ -81,7 +81,14 @@ def seed_list(request):
 def seeds_detail(request, seed_id):
   seed = Seed.objects.get(id=seed_id)
   note_form = NoteCreateForm()
-  return render(request, 'seeds/detail.html', {'seed': seed, 'note_form': note_form})
+  if User.objects.get(id=request.user.id).seed_set.filter(id=seed_id):
+    print('User has this seed already')
+    has_seed = True
+  else:
+    print('User does not have this seed')
+    has_seed = False
+  # does_user_have_seed = User.objects.get(id=request.user.id)
+  return render(request, 'seeds/detail.html', {'seed': seed, 'note_form': note_form, 'has_seed': has_seed})
 
 def add_note(request, seed_id):
   form = NoteCreateForm(request.POST)

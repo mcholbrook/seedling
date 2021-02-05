@@ -5,10 +5,16 @@
 <h1>{{seed.name}}</h1>
 <p>{{seed.description}}</p>
 <img src="../../static/images/{{seed.kind}}.png" />
-<form action="{% url 'save_seed' seed.id user.id%}" method="post">
-  {% csrf_token %}
+
+{% if has_seed %}
+  <p>You already saved this seed!</p>
+{% else %}
+  <form action="{% url 'save_seed' seed.id user.id%}" method="post">
+    {% csrf_token %}
   <button type='submit' class='btn btn-success'>Save Seed</button>
-</form>
+  </form>
+{% endif %}
+
 
 <form action="{% url 'add_note' seed.id %}" method="post">
   {% csrf_token %}
