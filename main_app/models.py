@@ -32,6 +32,9 @@ class Profile(models.Model):
   def __str__(self):
     return f"Profile for user: {self.user.first_name} at user_id {self.user_id}."
 
+  def get_absolute_url(self):
+    return reverse('users_detail', kwargs={'user_id': self.user_id})
+
 class Seed(models.Model):
   name = models.CharField(max_length=100)
   scientific_name = models.CharField('Scientific Name, if applicable', max_length=100, blank=True)

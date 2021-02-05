@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>{{user.first_name}}</p>
-<p>{{user.username}}</p>
-<p>{{profile.bio}}</p>
-{% if user.seed_set.count %}
-{% for seed in user.seed_set.all %}
-<p>{{seed.name}}</p>
-<img src="../../static/images/{{seed.kind}}.png" />
-{% endfor %}
-{% endif %}
+  <p>{{user.first_name}}</p>
+  <p>{{user.username}}</p>
+  <p>{{profile.bio}}</p>
+  <form action="{% url 'update_profile' profile.id %}" method="get">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Update Profile</button>
+  </form>
+  {% if user.seed_set.count %}
+    {% for seed in user.seed_set.all %}
+     <p>{{seed.name}}</p>
+     <img src="../../static/images/{{seed.kind}}.png" />
+    {% endfor %}
+  {% endif %}
 {% endblock %}

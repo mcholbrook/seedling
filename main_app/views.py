@@ -49,6 +49,11 @@ class ProfileCreate(CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
+class ProfileUpdate(UpdateView):
+  model = Profile
+  fields = ['bio', 'photo', 'zone']
+
+
 # class SeedCreate(CreateView):
 #   model = Seed
 #   fields = ['name', 'scientific_name', 'kind', 'description']
