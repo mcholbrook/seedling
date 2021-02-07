@@ -15,10 +15,12 @@
       <button type="submit" class="btn btn-success">Add Friend</button>
     </form>
   {% endif %}
+  {% if userAssociatedWithProfile.id == user.id %}
   <form action="{% url 'update_profile' profile.id %}" method="get">
     {% csrf_token %}
     <button type="submit" class="btn btn-success">Update Profile</button>
   </form>
+  {% endif %}
   {% if userAssociatedWithProfile.seed_set.count %}
     {% for seed in userAssociatedWithProfile.seed_set.all %}
      <p>{{seed.name}}</p>
