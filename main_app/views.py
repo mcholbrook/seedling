@@ -32,9 +32,9 @@ def add_friend(request, profile_id, otheruser_id):
 def delete_friend(request, profile_id, otheruser_id):
   friend = Profile.objects.get(id=profile_id)
   currentUser = Profile.objects.get(user_id=otheruser_id)
-  print(currentUser.friends.all())
+  # print(currentUser.friends.all())
   currentUser.friends.remove(profile_id)
-  print(currentUser.friends.all())
+  # print(currentUser.friends.all())
   currentUser.save()
   print(f'You have removed this friend: {friend}')
   return redirect('users_detail', userName_id=friend.user_id)
@@ -71,12 +71,6 @@ class ProfileUpdate(UpdateView):
   model = Profile
   fields = ['bio', 'photo', 'zone']
 
-
-# class SeedCreate(CreateView):
-#   model = Seed
-#   fields = ['name', 'scientific_name', 'kind', 'description']
-#   success_url = '/'
-
 def seed_create(request):
   CARD_CHOICES = (
   ('Flower', 'Flower'),
@@ -93,7 +87,6 @@ def seed_create(request):
     print(new_seed.id)
     Seed.objects.get(id=new_seed.id).users.add(request.user)
     return redirect('/seeds/')
-  # context['form']= form
   return render(request, 'main_app/seed_form.html', context)
 
 
@@ -125,4 +118,9 @@ def add_note(request, seed_id):
 
 def save_seed(request, seed_id, user_id):
   Seed.objects.get(id=seed_id).users.add(user_id)
+  return redirect('seeds_detail', seed_id=seed_id)
+
+def remove_seed(request, seed_id, user_id):
+  Seed.objects.get(id=seed_id).users.remove(user_id)
+  print(f'You removed user {user_id} from this seed: {seed_id}')
   return redirect('seeds_detail', seed_id=seed_id)
