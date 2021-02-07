@@ -35,8 +35,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'postman',
-    # 'django_messages',
     'main_app',
     'crispy_forms',
     'django.contrib.admin',

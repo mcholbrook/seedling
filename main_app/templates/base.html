@@ -23,13 +23,6 @@
           <li class="nav-item"><a class="nav-link" href="{% url 'seeds_create' %}">Add Seeds</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'seeds_list' %}">All Seeds</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'users_detail' user.id %}">My Profile</a></li>
-          <ul id="postman_menu">
-            <li><a href="{% url 'postman:inbox' %}">&raquo;&nbsp;Inbox{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a></li>
-            <li><a href="{% url 'postman:sent' %}">&raquo;&nbsp;Sent Messages</a></li>
-            <li><a href="{% url 'postman:write' %}">&raquo;&nbsp;Write</a></li>
-            <li><a href="{% url 'postman:archives' %}">&raquo;&nbsp;Archives</a></li>
-            <li><a href="{% url 'postman:trash' %}">&raquo;&nbsp;Trash</a></li>
-           </ul>
           <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
           <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
