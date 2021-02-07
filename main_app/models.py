@@ -31,7 +31,7 @@ class Profile(models.Model):
   friends = models.ManyToManyField("self", symmetrical=False)
 
   def __str__(self):
-    return f"Profile for user: {self.user.first_name} at user_id {self.user_id}."
+    return f"Profile for user: {self.user.first_name} at user_id {self.user_id}, profile object {self.id}."
 
   # def get_absolute_url(self):
   #   return reverse('users_detail', kwargs={'user_id': self.user_id})

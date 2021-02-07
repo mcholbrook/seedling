@@ -9,6 +9,7 @@ urlpatterns = [
   path('users/<int:userName_id>/', views.users_detail, name='users_detail'),
   path('users/<int:pk>/updateprofile/', views.ProfileUpdate.as_view(), name='update_profile'),
   path('users/<int:profile_id>/addfriend/<int:otheruser_id>', views.add_friend, name='add_friend'),
+  path('users/<int:profile_id>/deletefriend/<int:otheruser_id>', views.delete_friend, name='delete_friend'),
   path('seeds/create', views.seed_create, name='seeds_create'),
   path('seeds/', views.seed_list, name='seeds_list'),
   path('seeds/<int:seed_id>/', views.seeds_detail, name='seeds_detail'),

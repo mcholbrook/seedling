@@ -8,6 +8,10 @@
     {% csrf_token %}
     <button type="submit" class="btn btn-success">Add Friend</button>
   </form>
+  <form action="{% url 'delete_friend' profile.id user.id%}" method="get">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Delete Friend</button>
+  </form>
   <form action="{% url 'update_profile' profile.id %}" method="get">
     {% csrf_token %}
     <button type="submit" class="btn btn-success">Update Profile</button>

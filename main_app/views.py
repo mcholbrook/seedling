@@ -25,9 +25,18 @@ def users_detail(request, userName_id):
 def add_friend(request, profile_id, otheruser_id):
   friend = Profile.objects.get(id=profile_id)
   currentUser = Profile.objects.get(user_id=otheruser_id)
-  print(friend)
-  print(currentUser)
+  print(f"You are adding this person {friend} to {currentUser}'s friend list")
   currentUser.friends.add(friend)
+  return redirect('users_detail', userName_id=friend.user_id)
+
+def delete_friend(request, profile_id, otheruser_id):
+  friend = Profile.objects.get(id=profile_id)
+  currentUser = Profile.objects.get(user_id=otheruser_id)
+  print(currentUser.friends.all())
+  currentUser.friends.remove(profile_id)
+  print(currentUser.friends.all())
+  currentUser.save()
+  print(f'You have removed this friend: {friend}')
   return redirect('users_detail', userName_id=friend.user_id)
 
 def signup(request):
