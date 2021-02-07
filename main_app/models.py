@@ -38,7 +38,7 @@ class Profile(models.Model):
 
 class Seed(models.Model):
   name = models.CharField(max_length=100)
-  scientific_name = models.CharField('Scientific Name, if applicable', max_length=100, blank=True)
+  seed_source = models.CharField('Seed Source', max_length=100,  blank=True)
   kind = models.CharField(
     max_length=500,
     choices=CARD_CHOICES,

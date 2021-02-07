@@ -5,3 +5,29 @@
 h1 {
   font-family: 'Montserrat', sans-serif;
 }
+
+#seed_index_page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardModule {
+  width: 400px;
+  height: 205px;
+  overflow: hidden;
+  margin: 10px;
+}
+
+.cardModule img {
+  justify-content: center;
+  align-items: center;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

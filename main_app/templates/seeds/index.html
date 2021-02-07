@@ -3,11 +3,25 @@
 {% block content %}
 <h1>Seed Index</h1>
 
+<div id=seed_index_page>
+  
 {% for seed in seeds %}
 
-<a href={% url 'seeds_detail' seed.id %}><p>{{seed.name}}</p></a>
-<img src="../../static/images/{{seed.kind}}.png"/>
+<div class="card mb-3 cardModule" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-6">
+      <div class="card-body">
+        <h5 class="card-title">{{seed.name}}</h5>
+        <a class="card-text" href="{% url 'seeds_detail' seed.id %}"><small>Details</small></a>
+        <p class="card-text line-clamp">{{seed.description}}</p>
+      </div>
+    </div>
+    <div class="col-6">
+      <img src="../../static/images/{{seed.kind}}.png" alt="...">
+    </div>
+  </div>
+</div>
 
 {% endfor %}
-
+</div>
 {% endblock %}
