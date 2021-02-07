@@ -35,6 +35,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'postman',
+    # 'django_messages',
     'main_app',
     'crispy_forms',
     'django.contrib.admin',
@@ -128,3 +130,12 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# POSTMAN_DISALLOW_ANONYMOUS = True
+# POSTMAN_AUTO_MODERATE_AS = True
+# AJAX_LOOKUP_CHANNELS = {
+#     'postman_users': dict(model='User', search_field='username')
+# }
+# POSTMAN_AUTOCOMPLETER_APP = {
+#     'arg_default': 'postman_users',
+# }
