@@ -4,14 +4,17 @@
   <p>{{userAssociatedWithProfile.first_name}}</p>
   <p>{{userAssociatedWithProfile.username}}</p>
   <p>{{profile.bio}}</p>
-  <form action="{% url 'add_friend' profile.id user.id%}" method="get">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-success">Add Friend</button>
-  </form>
-  <form action="{% url 'delete_friend' profile.id user.id%}" method="get">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-success">Delete Friend</button>
-  </form>
+  {% if is_friend %}
+    <form action="{% url 'delete_friend' profile.id user.id%}" method="get">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success">Delete Friend</button>
+    </form>
+  {% else %}
+    <form action="{% url 'add_friend' profile.id user.id%}" method="get">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success">Add Friend</button>
+    </form>
+  {% endif %}
   <form action="{% url 'update_profile' profile.id %}" method="get">
     {% csrf_token %}
     <button type="submit" class="btn btn-success">Update Profile</button>

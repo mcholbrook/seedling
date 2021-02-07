@@ -20,7 +20,14 @@ def users_index(request):
 def users_detail(request, userName_id):
   userWhoOwnsProfile = User.objects.get(id=userName_id)
   profile = Profile.objects.get(user=userName_id)
-  return render(request, 'users/detail.html', { 'userAssociatedWithProfile': userWhoOwnsProfile, 'profile': profile })
+  loggedInUserProfile = Profile.objects.get(user_id=request.user.id)
+  if loggedInUserProfile.friends.filter(id=profile.id):
+    print('User is friends with this person already')
+    is_friend = True
+  else:
+    print('User is not friends with this person yet')
+    is_friend = False
+  return render(request, 'users/detail.html', { 'userAssociatedWithProfile': userWhoOwnsProfile, 'profile': profile, 'is_friend':is_friend })
 
 def add_friend(request, profile_id, otheruser_id):
   friend = Profile.objects.get(id=profile_id)
