@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
 from .models import Profile, User, Seed, Note, Conversation, Message
-from .forms import UserForm, SeedCreateForm, NoteCreateForm, MessageCreateForm
+from .forms import UserForm, SeedCreateForm, NoteCreateForm, MessageCreateForm, ReplyForm
 from PIL import Image
 # Create your views here.
 
@@ -139,7 +139,8 @@ def conversations_index(request):
 def conversations_detail(request, conversation_id):
   conversation = Conversation.objects.get(id=conversation_id)
   print(conversation)
-  return render(request, 'conversations/detail.html', {'conversation': conversation})
+  reply_form = ReplyForm()
+  return render(request, 'conversations/detail.html', {'conversation': conversation, 'reply_form': reply_form})
 
 def messages_create(request):
   form = MessageCreateForm(request.POST)
@@ -155,3 +156,22 @@ def messages_create(request):
     print(new_message.conversation_id)
     new_message.save()
   return render(request, 'conversations/create_message.html', context)
+
+def conversations_reply(request, conversation_id):
+  form = ReplyForm(request.POST)
+  if form.is_valid():
+    conversation = Conversation.objects.get(id=conversation_id)
+    new_message = form.save(commit=False)
+    new_message.sender_id = request.user.id
+    findRecipient = conversation.participants.exclude(id=request.user.id)
+    print(findRecipient[0])
+    recipient = User.objects.get(id=findRecipient[0].id)
+    # print(f'recipient: {new_message.recipient_id}')
+    new_message.recipient_id = recipient.id
+    print(new_message.recipient_id)
+    new_message.conversation_id = conversation.id
+    print(conversation_id)
+    print(new_message.conversation_id)
+    print(new_message)
+    new_message.save()
+  return redirect('conversations_detail', conversation_id=conversation_id)

@@ -29,3 +29,8 @@ class MessageCreateForm(ModelForm):
   class Meta:
     model = Message
     fields = ['recipient', 'content']
+
+class ReplyForm(ModelForm):
+  class Meta:
+    model = Message
+    fields = ['content']

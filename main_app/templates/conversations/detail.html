@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 <h1>Conversation Details</h1>
@@ -8,4 +8,11 @@
 {% for message in conversation.message_set.all %}
 <p>{{message.sender.first_name}}: {{message.content}}</p>
 {% endfor %}
+
+<form action="{% url 'conversations_reply' conversation.id %}" method="post">
+  {% csrf_token %}
+  {{ reply_form|crispy}}
+  <input type="submit" class="btn btn-success" value="Reply">
+</form>
+
 {% endblock %}

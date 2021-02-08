@@ -19,4 +19,5 @@ urlpatterns = [
   path('conversations/', views.conversations_index, name='conversations_index'),
   path('conversations/<int:conversation_id>/', views.conversations_detail, name='conversations_detail'),
   path('messages/create/', views.messages_create, name='messages_create'),
+  path('conversations/<int:conversation_id>/reply/', views.conversations_reply, name='conversations_reply'),
 ]
