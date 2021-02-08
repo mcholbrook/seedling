@@ -155,6 +155,7 @@ def messages_create(request):
     new_message.conversation_id = new_conversation.id
     print(new_message.conversation_id)
     new_message.save()
+    return redirect('/conversations/')
   return render(request, 'conversations/create_message.html', context)
 
 def conversations_reply(request, conversation_id):
