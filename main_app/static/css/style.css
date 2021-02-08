@@ -12,6 +12,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .cardModule {

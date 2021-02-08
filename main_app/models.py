@@ -15,7 +15,8 @@ PRODUCE = (
 
 CARD_CHOICES = [
   ( 'FLOWER', 'Flower'),
-  ('HERB', 'Herb')
+  ('HERB', 'Herb'),
+  ('ARUGULA', 'Arugula'),
 ]
 
 # CARD_CHOICES = (
