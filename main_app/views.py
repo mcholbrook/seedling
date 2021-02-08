@@ -159,7 +159,7 @@ def messages_create(request):
       new_message.conversation_id = new_conversation.id
     # print(new_message.conversation_id)
     new_message.save()
-    return redirect('/conversations/')
+    return redirect('conversations_detail', conversation_id=new_message.conversation_id)
   return render(request, 'conversations/create_message.html', context)
 
 def conversations_reply(request, conversation_id):
@@ -198,5 +198,5 @@ def share_seed(request, seed_id):
       new_message.conversation_id = new_conversation.id
     # print(new_message.conversation_id)
     new_message.save()
-    return redirect('/conversations/')
+    return redirect('conversations_detail', conversation_id=new_message.conversation_id)
   return render(request, 'conversations/create_message.html', context)
