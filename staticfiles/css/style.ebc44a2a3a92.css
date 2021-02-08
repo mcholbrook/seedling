@@ -1,0 +1,56 @@
+body {
+  padding-top: 90px;
+}
+
+.navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+  
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+#seed_index_page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /* font-family: 'Montserrat', sans-serif; */
+}
+
+.cardModule {
+  width: 400px;
+  height: 205px;
+  overflow: hidden;
+  margin: 10px;
+}
+
+.cardModule img {
+  justify-content: center;
+  align-items: center;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+#card-description {
+  height: 95px;
+  overflow: hidden;
+}
+
+.seed-source {
+  margin: 0;
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+/* .card-body {
+  background-color: lightgreen;
+} */
