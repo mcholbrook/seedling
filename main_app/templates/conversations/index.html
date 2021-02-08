@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Inbox</h1>
+<h1>Allllll the inboxes</h1>
+{% for conversation in conversations %}
+<a href="{% url 'conversations_detail' conversation.id %}">{{conversation.id}}</a>
+<p>{{conversation.participants.all }}</p>
+
+{% endfor %}
+
+{% endblock %}

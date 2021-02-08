@@ -126,7 +126,7 @@ class Conversation(models.Model):
 class Message(models.Model):
   sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
   recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipient')
-  conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+  conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, null=True)
   content = models.TextField('Your Message', max_length=500)
   date = models.DateField(default=datetime.now)
 

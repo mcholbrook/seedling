@@ -1,7 +1,7 @@
 
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from .models import Seed, Note
+from .models import Seed, Note, Message, Conversation
 from django.contrib.auth.forms import UserCreationForm
 
 # class UserForm(ModelForm):
@@ -24,3 +24,8 @@ class NoteCreateForm(ModelForm):
   class Meta:
     model = Note
     fields = ['date', 'content']
+
+class MessageCreateForm(ModelForm):
+  class Meta:
+    model = Message
+    fields = ['recipient', 'content']

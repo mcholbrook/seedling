@@ -3,13 +3,12 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
-from .models import Profile, User, Seed, Note
-from .forms import UserForm, SeedCreateForm, NoteCreateForm
+from .models import Profile, User, Seed, Note, Conversation, Message
+from .forms import UserForm, SeedCreateForm, NoteCreateForm, MessageCreateForm
 from PIL import Image
 # Create your views here.
 
 def home(request):
-  # chamomile = Image.open('.static/images/chamomile.png')
   return render(request, 'home.html')
 
 def users_index(request):
@@ -131,3 +130,28 @@ def remove_seed(request, seed_id, user_id):
   Seed.objects.get(id=seed_id).users.remove(user_id)
   print(f'You removed user {user_id} from this seed: {seed_id}')
   return redirect('seeds_detail', seed_id=seed_id)
+
+def conversations_index(request):
+  conversations = Conversation.objects.filter(participants=request.user)
+  print(conversations)
+  return render(request, 'conversations/index.html', {'conversations': conversations})
+
+def conversations_detail(request, conversation_id):
+  conversation = Conversation.objects.get(id=conversation_id)
+  print(conversation)
+  return render(request, 'conversations/detail.html', {'conversation': conversation})
+
+def messages_create(request):
+  form = MessageCreateForm(request.POST)
+  context = {'form': form}
+  if form.is_valid():
+    new_message = form.save(commit=False)
+    new_message.sender_id = request.user.id
+    print(new_message.id)
+    new_conversation = Conversation.objects.create()
+    print(new_conversation)
+    new_conversation.participants.add(request.user.id, new_message.recipient.id)
+    new_message.conversation_id = new_conversation.id
+    print(new_message.conversation_id)
+    new_message.save()
+  return render(request, 'conversations/create_message.html', context)
