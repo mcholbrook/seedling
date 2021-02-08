@@ -11,9 +11,6 @@ PRODUCE = (
   ('FL', 'Flower')
 )
 
-# FLOWER = 'Flower'
-# HERB = 'Herb'
-
 CARD_CHOICES = [
   ( 'flower', 'flower'),
   ('herb', 'herb'),
@@ -79,11 +76,6 @@ CARD_CHOICES = [
   ('yam', 'yam'),
 ]
 
-# CARD_CHOICES = (
-#   ('Flower', '../../static/images/Flower.png'),
-#   ('Herb', '../../static/images/Herb.png')
-# )
-
 class Profile(models.Model):
   bio = models.TextField(max_length=200, blank=True)
   photo = models.CharField(max_length=200, blank=True)
@@ -120,6 +112,9 @@ class Note(models.Model):
   def __str__(self):
     return f"{self.content} on {self.date}"
 
+  class Meta:
+    ordering = ['-date']
+
 class Conversation(models.Model):
   participants = models.ManyToManyField(User)
 
@@ -134,3 +129,18 @@ class Message(models.Model):
   def __str__(self):
     return f"{self.sender} and {self.recipient} on {self.date}"
   
+
+class Garden(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f"Garden, id: {self.id}"
+
+class Todo(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  date = models.DateField(default=datetime.now)
+  garden = models.ForeignKey(Garden, on_delete=models.CASCADE)
+  content = models.CharField(max_length=200)
+
+  def __str__(self):
+    return f"Todo: {self.content}"
