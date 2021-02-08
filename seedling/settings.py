@@ -129,11 +129,5 @@ LOGOUT_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# POSTMAN_DISALLOW_ANONYMOUS = True
-# POSTMAN_AUTO_MODERATE_AS = True
-# AJAX_LOOKUP_CHANNELS = {
-#     'postman_users': dict(model='User', search_field='username')
-# }
-# POSTMAN_AUTOCOMPLETER_APP = {
-#     'arg_default': 'postman_users',
-# }
+import django_heroku
+django_heroku.settings(locals())
