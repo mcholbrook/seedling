@@ -129,6 +129,8 @@ class Message(models.Model):
   conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, null=True)
   content = models.TextField('Your Message', max_length=500)
   date = models.DateField(default=datetime.now)
+  seed = models.ForeignKey(Seed, on_delete=models.CASCADE, null=True)
 
-
+  def __str__(self):
+    return f"{self.sender} and {self.recipient} on {self.date}"
   
