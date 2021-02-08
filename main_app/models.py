@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from datetime import date
+from datetime import datetime
+
 # Create your models here.
 PRODUCE = (
   ('V', 'Vegetable'),
@@ -111,7 +112,7 @@ class Seed(models.Model):
     return f"{self.name} seed, type {self.get_kind_display()}"
 
 class Note(models.Model):
-  date = models.DateField()
+  date = models.DateField(default=datetime.now)
   content = models.TextField(max_length=500)
   seed = models.ForeignKey(Seed, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -127,7 +128,7 @@ class Message(models.Model):
   recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipient')
   conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
   content = models.TextField('Your Message', max_length=500)
-  date = models.DateField()
+  date = models.DateField(default=datetime.now)
 
 
   

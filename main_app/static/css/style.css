@@ -1,5 +1,6 @@
 .navbar-brand {
   font-family: 'Montserrat', sans-serif;
+  
 }
 
 h1 {
@@ -12,7 +13,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
 }
 
 .cardModule {
@@ -45,3 +46,7 @@ h1 {
 .card-title {
   margin-bottom: 0;
 }
+
+/* .card-body {
+  background-color: lightgreen;
+} */
