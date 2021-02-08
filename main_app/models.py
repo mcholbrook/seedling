@@ -89,7 +89,7 @@ class Profile(models.Model):
   photo = models.CharField(max_length=200, blank=True)
   zone = models.CharField('What gardening zone are you in?', max_length=15, blank=True)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
-  friends = models.ManyToManyField("self", symmetrical=False)
+  friends = models.ManyToManyField("self", symmetrical=False, blank=True)
 
   def __str__(self):
     return f"Profile for user: {self.user.first_name} at user_id {self.user_id}, profile object {self.id}."
