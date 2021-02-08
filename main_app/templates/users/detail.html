@@ -4,6 +4,7 @@
   <p>{{userAssociatedWithProfile.first_name}}</p>
   <p>{{userAssociatedWithProfile.username}}</p>
   <p>{{profile.bio}}</p>
+
   
   {% if userAssociatedWithProfile.id == user.id %}
     <form action="{% url 'update_profile' profile.id %}" method="get">

@@ -7,6 +7,27 @@
 
 {% for message in conversation.message_set.all %}
 <p>{{message.sender.first_name}}: {{message.content}}</p>
+  {% if message.seed %}
+  <div class="card mb-3 cardModule" style="max-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-6">
+        <div class="card-body">
+          <h5 class="card-title">{{message.seed.name}}</h5>
+          {% if message.seed.seed_source %}
+          <p class="card-text seed-source"><small class="text-muted">{{message.seed.seed_source}}</small></p>
+          {% endif %}
+          <a class="card-text" href="{% url 'seeds_detail' message.seed.id %}"><small>Details</small></a>
+          <div id="card-description">
+            <p class="card-text line-clamp">{{message.seed.description}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <img src="../../static/images/{{message.seed.kind}}.png">
+      </div>
+    </div>
+  </div>
+  {% endif %}
 {% endfor %}
 
 <form action="{% url 'conversations_reply' conversation.id %}" method="post">

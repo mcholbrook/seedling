@@ -6,6 +6,8 @@
 <p>{{seed.description}}</p>
 <img src="../../static/images/{{seed.kind}}.png" />
 
+<a href="{% url 'share_seed' seed.id %}">Share</a>
+
 {% if has_seed %}
   <p>You already saved this seed!</p>
   <form action="{% url 'remove_seed' seed.id user.id%}" method="post">
