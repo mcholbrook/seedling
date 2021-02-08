@@ -4,4 +4,7 @@
 <h1>Conversation Details</h1>
 <p>{{conversation.id}}</p>
 
+{% for message in conversation.message_set.all %}
+<p>{{message.sender.first_name}}: {{message.content}}</p>
+{% endfor %}
 {% endblock %}
