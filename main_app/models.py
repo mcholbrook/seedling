@@ -59,3 +59,16 @@ class Note(models.Model):
 
   def __str__(self):
     return f"{self.content} on {self.date}"
+
+class Conversation(models.Model):
+  participants = models.ManyToManyField(User)
+
+class Message(models.Model):
+  sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
+  recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipient')
+  conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+  content = models.TextField('Your Message', max_length=500)
+  date = models.DateField()
+
+
+  
