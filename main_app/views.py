@@ -183,7 +183,7 @@ def share_seed(request, seed_id):
     new_message.sender_id = request.user.id
     if seed_id:
       new_message.seed_id = seed_id
-      print(new_message.seed_id)
+      # print(new_message.seed_id)
     existing_conversation = Conversation.objects.filter(participants = request.user and new_message.recipient)
     if existing_conversation:
       new_message.conversation_id = existing_conversation[0].id
@@ -197,3 +197,8 @@ def share_seed(request, seed_id):
     new_message.save()
     return redirect('conversations_detail', conversation_id=new_message.conversation_id)
   return render(request, 'conversations/create_message.html', context)
+
+def garden_detail(request, user_id):
+  garden = Garden.objects.get(user_id=user_id)
+  print(garden)
+  return render(request, 'garden/details.html', {'garden': garden,})
