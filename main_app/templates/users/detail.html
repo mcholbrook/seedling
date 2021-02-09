@@ -4,7 +4,7 @@
   <p>{{userAssociatedWithProfile.first_name}}</p>
   <p>{{userAssociatedWithProfile.username}}</p>
   <p>{{profile.bio}}</p>
-
+  <img class="profile-image" src="../../static/images/{{profile.avatar}}.png" alt="">
   
   {% if userAssociatedWithProfile.id == user.id %}
     <form action="{% url 'update_profile' profile.id %}" method="get">

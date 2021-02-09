@@ -18,7 +18,7 @@ class UserForm(UserCreationForm):
 class SeedCreateForm(ModelForm):
   class Meta:
     model = Seed
-    fields = ['name', 'seed_source', 'kind', 'description']
+    fields = ['name', 'seed_source', 'kind', 'description', 'maturity', 'spacing', 'grow_directions']
 
 class NoteCreateForm(ModelForm):
   class Meta:

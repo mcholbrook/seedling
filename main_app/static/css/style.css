@@ -54,3 +54,19 @@ h1 {
 /* .card-body {
   background-color: lightgreen;
 } */
+
+.profile-image{
+  border-radius: 50%;
+  background-color: rgb(145, 196, 68);
+  height: 200px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.profile-image-small{
+  border-radius: 50%;
+  background-color: rgb(145, 196, 68);
+  height: 50px;
+  padding: 5px;
+  margin: 10px;
+}

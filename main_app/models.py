@@ -4,9 +4,18 @@ from django.urls import reverse
 from datetime import datetime
 
 # Create your models here.
+AVATAR_CHOICES = [
+  ('beet', 'beet'),
+  ('cabbage(green)', 'cabbage(green)'),
+  ('calendula', 'calendula'),
+  ('radish', 'radish'),
+  ('scallions', 'scallions'),
+  ('strawberries', 'strawberries'),
+  ('tomato(heirloom)', 'tomato(heirloom)'),
+]
 
 CARD_CHOICES = [
-  ( 'flower', 'flower'),
+  ('flower', 'flower'),
   ('herb', 'herb'),
   ('arugula', 'arugula'),
   ('asparagus', 'asparagus'),
@@ -73,6 +82,11 @@ CARD_CHOICES = [
 class Profile(models.Model):
   bio = models.TextField(max_length=200, blank=True)
   photo = models.CharField(max_length=200, blank=True)
+  avatar = models.CharField(
+    max_length=500,
+    choices=AVATAR_CHOICES,
+    default=AVATAR_CHOICES[0][0]
+  )
   zone = models.CharField('What gardening zone are you in?', max_length=15, blank=True)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   friends = models.ManyToManyField("self", symmetrical=False, blank=True)

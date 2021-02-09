@@ -165,9 +165,7 @@ def conversations_reply(request, conversation_id):
     new_message = form.save(commit=False)
     new_message.sender_id = request.user.id
     findRecipient = conversation.participants.exclude(id=request.user.id)
-    print(findRecipient[0])
     recipient = User.objects.get(id=findRecipient[0].id)
-    # print(f'recipient: {new_message.recipient_id}')
     new_message.recipient_id = recipient.id
     new_message.conversation_id = conversation.id
     new_message.save()
@@ -182,17 +180,14 @@ def share_seed(request, seed_id):
     new_message.sender_id = request.user.id
     if seed_id:
       new_message.seed_id = seed_id
-      # print(new_message.seed_id)
     existing_conversation = Conversation.objects.filter(participants = request.user and new_message.recipient)
     if existing_conversation:
       new_message.conversation_id = existing_conversation[0].id
       print(new_message.conversation_id)
     else:
       new_conversation = Conversation.objects.create()
-      # print(new_conversation)
       new_conversation.participants.add(request.user.id, new_message.recipient.id)
       new_message.conversation_id = new_conversation.id
-    # print(new_message.conversation_id)
     new_message.save()
     return redirect('conversations_detail', conversation_id=new_message.conversation_id)
   return render(request, 'conversations/create_message.html', context)
