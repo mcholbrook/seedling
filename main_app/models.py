@@ -133,7 +133,7 @@ class Message(models.Model):
   sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
   recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipient', blank=True)
   conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, null=True)
-  content = models.TextField('Your Message', max_length=500)
+  content = models.CharField('Your Message', max_length=500)
   date = models.DateTimeField(default=datetime.now)
   seed = models.ForeignKey(Seed, on_delete=models.CASCADE, null=True)
 

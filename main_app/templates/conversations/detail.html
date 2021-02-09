@@ -2,15 +2,14 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<h1>Conversation Details</h1>
-
-<div id="message-reply">
-  <form action="{% url 'conversations_reply' conversation.id %}" method="post">
-    {% csrf_token %}
-    {{ reply_form|crispy}}
-    <input type="submit" class="btn btn-success" value="Reply">
-  </form>
-</div>
+<div id="conversation-details">
+{% for participant in conversation.participants.all %}
+{% if participant.id == user.id %}
+<div></div>
+{% else %}
+<h3>Conversation with {{participant.first_name}}</h3>
+{% endif %}
+{% endfor %}
 <div class="conversation-container">
   {% for message in conversation.message_set.all %}
     {% if message.sender.id == user.id %}
@@ -45,5 +44,14 @@
   {% endfor %}
 </div>
 
-
+<footer class="fixed-bottom">
+  <div id="message-reply">
+    <form action="{% url 'conversations_reply' conversation.id %}" method="post">
+      {% csrf_token %}
+      {{ reply_form|crispy}}
+      <input type="submit" class="btn btn-success" value="Reply">
+    </form>
+  </div>
+</footer>
+</div>
 {% endblock %}
