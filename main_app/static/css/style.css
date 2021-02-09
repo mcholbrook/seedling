@@ -147,3 +147,17 @@ h1 {
 .message-footer {
   background-color: rgb(210, 210, 210, .9);
 }
+
+#conversation-header{
+  display: inline-block;
+}
+
+#conversation-header h3{
+  display: inline;
+  padding-left: 20px;
+}
+
+#conversation-header a{
+  position: absolute;
+  right: 20px;
+}

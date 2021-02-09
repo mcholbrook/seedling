@@ -3,11 +3,14 @@
 {% block content %}
 
 <div id="conversation-details">
+  <div id="conversation-header">
 {% for participant in conversation.participants.all %}
 {% if participant.id != user.id %}
 <h3>Conversation with {{participant.first_name}}</h3>
 {% endif %}
 {% endfor %}
+<a href="{% url 'conversations_index' %}" type="btn" class="btn btn-success">Back to Inbox</a>
+</div>
 <div class="conversation-container">
   {% for message in conversation.message_set.all %}
     {% if message.sender.id == user.id %}
