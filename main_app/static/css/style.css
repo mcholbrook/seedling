@@ -8,6 +8,10 @@ body {
   
 }
 
+.dropdown-menu {
+  min-width: 220px;
+}
+
 h1 {
   font-family: 'Montserrat', sans-serif;
 }
