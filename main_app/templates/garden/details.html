@@ -1,41 +1,64 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h1>Your Garden</h1>
-<form action="{% url 'add_todo' garden.id %}" method="post">
-  {% csrf_token %}
-  {{ todo_form|crispy}}
-  <input type="submit" class="btn btn-success" value="Add Todo">
-</form>
 
-
-{% if todos %}
-{% for todo in todos %}
-<p>{{todo.content}}</p>
-<a href="{% url 'delete_todo' garden.id todo.id %}">Delete</a>
-{% endfor %}
-{% endif %}
-
-{% for seed in seeds %}
-  <div class="card mb-3 cardModule" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-6">
-        <div class="card-body">
-          <h5 class="card-title">{{seed.name}}</h5>
-          {% if seed.seed_source %}
-          <p class="card-text seed-source"><small class="text-muted">{{seed.seed_source}}</small></p>
-          {% endif %}
-          <a class="card-text" href="{% url 'seeds_detail' seed.id %}"><small>Details</small></a>
-          <div id="card-description">
-            <p class="card-text line-clamp">{{seed.description}}</p>
+<div id="garden-details">
+  <div id="garden-details-header">
+    <h1>Your Garden</h1>
+  </div>
+  <div class="row">
+    <div class="col" id="garden-details-seeds">
+      {% for seed in seeds %}
+        <div class="card mb-3 cardModule" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-6">
+              <div class="card-body">
+                <h5 class="card-title">{{seed.name}}</h5>
+                {% if seed.seed_source %}
+                <p class="card-text seed-source"><small class="text-muted">{{seed.seed_source}}</small></p>
+                {% endif %}
+                <a class="card-text" href="{% url 'seeds_detail' seed.id %}"><small>Details</small></a>
+                <div id="card-description">
+                  <p class="card-text line-clamp">{{seed.description}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <img src="../../static/images/{{seed.kind}}.png" alt="...">
+            </div>
           </div>
         </div>
+      {% endfor %}
+    </div>
+    <div class="col" id="garden-details-todos">
+      <div id="garden-details-todos-form">
+        <form action="{% url 'add_todo' garden.id %}" method="post">
+          {% csrf_token %}
+          {{ todo_form|crispy}}
+          <input type="submit" class="btn btn-light" value="Add Todo">
+        </form>
       </div>
-      <div class="col-6">
-        <img src="../../static/images/{{seed.kind}}.png" alt="...">
-      </div>
+      {% if todos %}
+      <table class="table table-striped">
+        <thead>
+          <th scope="col">To-Do</th>
+          <th scope="col">✔️</th>
+        </thead>
+        <tbody>
+        {% for todo in todos %}
+          <tr>
+            <td>
+              {{todo.content}}
+            </td>
+            <td>
+              <a href="{% url 'delete_todo' garden.id todo.id %}">✖️</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      </table>
+      {% endif %}
     </div>
   </div>
-{% endfor %}
-
+</div>
 {% endblock %}
