@@ -14,7 +14,7 @@ body {
   border: grey solid 2px;
 }
 
-h1 {
+h1, h3 {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -242,16 +242,27 @@ h1 {
   margin-left: 20px;
 }
 
+#garden-details-header p{
+  /* width: 80%; */
+}
+
 #garden-details-seeds{
   display: flex;
   flex-direction: column;
   justify-content: left;
   align-items: left;
   padding-left: 20px;
+  /* border-right: lightgrey solid 2px; */
 }
+
+#garden-details-seeds h3{
+  padding-left: 10px;
+}
+
 
 #garden-details-todos-form{
   margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 #garden-details-todos-form label{
@@ -263,5 +274,8 @@ h1 {
   flex-direction: column;
   /* justify-content: center; */
   align-items: left;
+  padding-right: 20px;
+  /* margin-left: 50px; */
   margin-right: 20px;
+  
 }

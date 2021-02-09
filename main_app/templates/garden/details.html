@@ -4,10 +4,13 @@
 
 <div id="garden-details">
   <div id="garden-details-header">
-    <h1>Your Garden</h1>
+    <h1>My Garden</h1>
+    <p class="text-muted">Welcome to your garden tracker! This is where you can keep track of which seeds in your seed library you're growing this season.</p>
+    <hr>
   </div>
   <div class="row">
     <div class="col" id="garden-details-seeds">
+      <h3>What You're Growing</h3>
       {% for seed in seeds %}
         <div class="card mb-3 cardModule" style="max-width: 540px;">
           <div class="row no-gutters">
@@ -31,6 +34,7 @@
       {% endfor %}
     </div>
     <div class="col" id="garden-details-todos">
+      <h3>Garden To-Do List</h3>
       <div id="garden-details-todos-form">
         <form action="{% url 'add_todo' garden.id %}" method="post">
           {% csrf_token %}

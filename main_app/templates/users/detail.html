@@ -30,4 +30,9 @@
      <img src="../../static/images/{{seed.kind}}.png" />
     {% endfor %}
   {% endif %}
+
+  {% for friend in friends %}
+  <p>{{friend.user.first_name}}</p>
+  <img src="../../static/images/{{friend.avatar}}.png" class="profile-image-small" alt="">
+  {% endfor %}
 {% endblock %}
