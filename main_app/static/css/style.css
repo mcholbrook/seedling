@@ -1,15 +1,36 @@
 body {
-  padding-top: 80px;
-  
+  padding-top: 53px;
 }
 
 .navbar-brand {
   font-family: 'Montserrat', sans-serif;
-  
 }
 
 .dropdown-menu {
   min-width: 220px;
+}
+
+#home-page{
+  background-image: url('../images/background.jpg');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: top right;
+  height: 94vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#welcome {
+  background-color:rgb(110, 168, 110);
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
 h1 {
