@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <div id="inbox-header">
   <h1>Inbox</h1>
-  <hr>
+  <a class="btn btn-light" href="{% url 'messages_create' %}">New Message</a>
+  </div>
+  
   <div id="inbox">
   {% for conversation in conversations %}
     <a class="inbox-message" href="{% url 'conversations_detail' conversation.id %}">
