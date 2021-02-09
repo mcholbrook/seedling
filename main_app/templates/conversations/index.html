@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h1>Inbox</h1>
-<h1>Allllll the inboxes</h1>
-{% for conversation in conversations %}
-<a href="{% url 'conversations_detail' conversation.id %}">{{conversation.id}}</a>
-<p>{{conversation.participants.all }}</p>
-
-{% endfor %}
-
+  <h1>Inbox</h1>
+  <hr>
+  <div id="inbox">
+  {% for conversation in conversations %}
+    <a class="inbox-message" href="{% url 'conversations_detail' conversation.id %}">
+      {% for participant in conversation.participants.all %}
+        {% if participant.id != user.id %}
+          <p><b>{{participant.first_name}}</b></p>
+        {% endif %}
+      {% endfor %}
+      {% for message in conversation.message_set.all|slice:":1" %}
+      <p class="text-muted">{{message.content}}</p>
+      {% endfor %}
+    </a>
+    <hr>
+  {% endfor %}
+  </div>
 {% endblock %}
