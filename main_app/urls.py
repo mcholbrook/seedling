@@ -22,5 +22,6 @@ urlpatterns = [
   path('messages/create/', views.messages_create, name='messages_create'),
   path('messages/shareseed/<int:seed_id>/', views.share_seed, name='share_seed'),
   path('garden/<int:user_id>', views.garden_detail, name='garden_detail'),
-  
+  path('garden/<int:garden_id>/addtodo/', views.add_todo, name='add_todo'),
+  path('garden/<int:garden_id>/deletetodo/<int:todo_id>/', views.delete_todo, name='delete_todo'),
 ]
