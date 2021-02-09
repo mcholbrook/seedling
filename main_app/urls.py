@@ -24,4 +24,5 @@ urlpatterns = [
   path('garden/<int:user_id>', views.garden_detail, name='garden_detail'),
   path('garden/<int:garden_id>/addtodo/', views.add_todo, name='add_todo'),
   path('garden/<int:garden_id>/deletetodo/<int:todo_id>/', views.delete_todo, name='delete_todo'),
+  path('garden/<int:user_id>/growseed/<int:seed_id>/', views.grow_seed, name='grow_seed'),
 ]

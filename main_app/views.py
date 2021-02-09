@@ -200,9 +200,10 @@ def share_seed(request, seed_id):
 def garden_detail(request, user_id):
   garden = Garden.objects.get(user_id=user_id)
   todos = Todo.objects.filter(user_id=user_id)
+  seeds = garden.seeds.all()
+  print(seeds)
   todo_form = TodoForm()
-  print(garden)
-  return render(request, 'garden/details.html', {'garden': garden, 'todos': todos, 'todo_form': todo_form})
+  return render(request, 'garden/details.html', {'garden': garden, 'todos': todos, 'todo_form': todo_form, 'seeds': seeds})
 
 def add_todo(request, garden_id):
   form = TodoForm(request.POST)
@@ -215,5 +216,9 @@ def add_todo(request, garden_id):
 
 def delete_todo(request, garden_id, todo_id):
   Todo.objects.filter(id=todo_id).delete()
-  print('This was deleted!')
   return redirect('garden_detail', user_id=request.user.id)
+
+def grow_seed(request, user_id, seed_id):
+  garden = Garden.objects.get(user_id=user_id)
+  garden.seeds.add(seed_id)
+  return redirect('seeds_detail', seed_id=seed_id)

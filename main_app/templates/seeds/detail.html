@@ -14,6 +14,10 @@
     {% csrf_token %}
   <button type='submit' class='btn btn-success'>Remove Seed</button>
   </form>
+  <form action="{% url 'grow_seed' user.id seed.id%}" method="post">
+    {% csrf_token %}
+  <button type='submit' class='btn btn-success'>Add Seed to Your Garden</button>
+  </form>
 {% else %}
   <form action="{% url 'save_seed' seed.id user.id%}" method="post">
     {% csrf_token %}
