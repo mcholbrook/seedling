@@ -4,9 +4,7 @@
 
 <div id="conversation-details">
 {% for participant in conversation.participants.all %}
-{% if participant.id == user.id %}
-<div></div>
-{% else %}
+{% if participant.id != user.id %}
 <h3>Conversation with {{participant.first_name}}</h3>
 {% endif %}
 {% endfor %}
