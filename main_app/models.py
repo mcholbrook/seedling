@@ -4,12 +4,6 @@ from django.urls import reverse
 from datetime import datetime
 
 # Create your models here.
-PRODUCE = (
-  ('V', 'Vegetable'),
-  ('FR', 'Fruit'),
-  ('H', 'Herb'),
-  ('FL', 'Flower')
-)
 
 CARD_CHOICES = [
   ( 'flower', 'flower'),
@@ -98,6 +92,9 @@ class Seed(models.Model):
     default=CARD_CHOICES[0][0]
   )
   description = models.TextField(max_length=300, blank=True)
+  maturity = models.CharField('Days to Maturity', max_length=50, blank=True)
+  spacing = models.CharField('Plant Spacing', max_length=50, blank=True)
+  grow_directions = models.TextField('Growing Directions', max_length=500, blank=True)
   users = models.ManyToManyField(User)
 
   def __str__(self):
@@ -139,7 +136,7 @@ class Garden(models.Model):
 
 class Todo(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
-  date = models.DateField(default=datetime.now)
+  date = models.DateTimeField(default=datetime.now)
   garden = models.ForeignKey(Garden, on_delete=models.CASCADE)
   content = models.CharField(max_length=200)
 
