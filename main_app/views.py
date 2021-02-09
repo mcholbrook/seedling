@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
-from .models import Profile, User, Seed, Note, Conversation, Message
-from .forms import UserForm, SeedCreateForm, NoteCreateForm, MessageCreateForm, ReplyForm
-from PIL import Image
+from .models import Profile, User, Seed, Note, Conversation, Message, Garden, Todo
+from .forms import UserForm, SeedCreateForm, NoteCreateForm, MessageCreateForm, ReplyForm, TodoForm
+# from PIL import Image
 # Create your views here.
 
 def home(request):
@@ -54,6 +54,11 @@ def signup(request):
     if form.is_valid():
       # This will add the user to the database
       user = form.save()
+      new_garden = Garden.objects.create()
+      new_garden.user_id = user.id
+      print(new_garden)
+      print(new_garden.user_id)
+      new_garden.save()
       # This is how we log a user in via code
       login(request, user)
       return redirect('create_profile')
@@ -78,14 +83,6 @@ class ProfileUpdate(UpdateView):
   fields = ['bio', 'photo', 'zone']
 
 def seed_create(request):
-  CARD_CHOICES = (
-  ('Flower', 'Flower'),
-  ('Herb', 'Herb')
-  )
-  print(Seed.kind)
-  # kindlist = []
-  # for choice in CARD_CHOICES:
-  #   kindlist.append(choice[0])
   form = SeedCreateForm(request.POST)
   context = {'form': form}
   if form.is_valid():

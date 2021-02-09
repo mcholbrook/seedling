@@ -18,8 +18,8 @@ urlpatterns = [
   path('seeds/<int:seed_id>/removeseed/<int:user_id>', views.remove_seed, name='remove_seed'),
   path('conversations/', views.conversations_index, name='conversations_index'),
   path('conversations/<int:conversation_id>/', views.conversations_detail, name='conversations_detail'),
-  path('messages/create/', views.messages_create, name='messages_create'),
   path('conversations/<int:conversation_id>/reply/', views.conversations_reply, name='conversations_reply'),
+  path('messages/create/', views.messages_create, name='messages_create'),
   path('messages/shareseed/<int:seed_id>/', views.share_seed, name='share_seed'),
-  
+
 ]
