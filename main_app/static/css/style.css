@@ -18,6 +18,20 @@ h1, h3 {
   font-family: 'Montserrat', sans-serif;
 }
 
+/* Styling for sign up form and log in */
+
+#signup{
+  margin-left: 20px;
+}
+
+#signup-header{
+  margin-top: 20px;
+}
+
+#signup-form{
+  width: 50%;
+}
+
 /* Styling for home page */
 
 #home-page{
@@ -65,10 +79,6 @@ h1, h3 {
   overflow: hidden;
   margin: 10px;
 }
-
-/* .cardModule img {
-  border-left: lightgrey solid 2px;
-} */
 
 .line-clamp {
   display: -webkit-box;
@@ -195,6 +205,18 @@ h1, h3 {
  border-radius: 7px; 
 }
 
+#create-message{
+  margin-left: 20px;
+}
+
+#create-message-header{
+  margin-top: 20px;
+}
+
+#create-message-form{
+  width: 50%;
+}
+
 /* Styling for seed create form */
 
 #seed-create-header{
@@ -278,7 +300,6 @@ h1, h3 {
 }
 
 #profile-seeds{
-  /* margin-left: 20px; */
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -294,19 +315,27 @@ h1, h3 {
 #profile-seeds h3{
   padding-left: 10px;
 }
-/* #seed-card{
-  padding-left: 0px;
-} */
+
+/* Styling for profile create and update form */
+
+#create-profile{
+  margin-left: 20px;
+}
+
+#create-profile-header{
+  margin-top: 20px;
+}
+
+#create-profile-form{
+  width: 50%;
+}
+
 
 /* Styling for garden details page */
 
 #garden-details-header{
   margin-top: 20px;
   margin-left: 20px;
-}
-
-#garden-details-header p{
-  /* width: 80%; */
 }
 
 #garden-details-seeds{

@@ -6,25 +6,34 @@
 <p>{{seed.description}}</p>
 <img src="../../static/images/{{seed.kind}}.png" />
 
-<a href="{% url 'share_seed' seed.id %}">Share</a>
+<div id="seed-details-header">
+  <div id='seed-details-header-container'>
+    <img src="../../static/images/{{seed.kind}}.png" />
+    <div id='seed-details-header-text'>
+      <h3>{{seed.name}}</h3>
+    </div>
+  </div>
+</div>
 
-{% if has_seed %}
-  <p>You already saved this seed!</p>
-  <form action="{% url 'remove_seed' seed.id user.id%}" method="post">
-    {% csrf_token %}
-  <button type='submit' class='btn btn-success'>Remove Seed</button>
-  </form>
-  <form action="{% url 'grow_seed' user.id seed.id%}" method="post">
-    {% csrf_token %}
-  <button type='submit' class='btn btn-success'>Add Seed to Your Garden</button>
-  </form>
-{% else %}
-  <form action="{% url 'save_seed' seed.id user.id%}" method="post">
-    {% csrf_token %}
-  <button type='submit' class='btn btn-success'>Save Seed</button>
-  </form>
-{% endif %}
+<div id="seed-detail-logic">
+  {% if has_seed %}
+    <form action="{% url 'remove_seed' seed.id user.id%}" method="post">
+      {% csrf_token %}
+    <button type='submit' class='btn btn-light'>Remove Seed</button>
+    </form>
+    <form action="{% url 'grow_seed' user.id seed.id%}" method="post">
+      {% csrf_token %}
+    <button type='submit' class='btn btn-light'>Add Seed to Your Garden</button>
+    </form>
+  {% else %}
+    <form action="{% url 'save_seed' seed.id user.id%}" method="post">
+      {% csrf_token %}
+    <button type='submit' class='btn btn-light'>Save Seed</button>
+    </form>
+  {% endif %}
+</div>
 
+<a href="{% url 'share_seed' seed.id %}" class="btn btn-light">Share</a>
 
 <form action="{% url 'add_note' seed.id %}" method="post">
   {% csrf_token %}

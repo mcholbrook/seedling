@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-# from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
@@ -72,7 +71,7 @@ def signup(request):
 
 class ProfileCreate(CreateView):
   model = Profile
-  fields = ['bio', 'photo', 'zone']
+  fields = ['bio', 'avatar', 'zone']
   success_url = '/'
 
   def form_valid(self, form):
@@ -81,7 +80,8 @@ class ProfileCreate(CreateView):
 
 class ProfileUpdate(UpdateView):
   model = Profile
-  fields = ['bio', 'photo', 'zone']
+  fields = ['bio', 'avatar', 'zone']
+  # success_url = '/'
 
 def seed_create(request):
   form = SeedCreateForm(request.POST)
@@ -144,10 +144,11 @@ def messages_create(request):
   if form.is_valid():
     new_message = form.save(commit=False)
     new_message.sender_id = request.user.id
-    existing_conversation = Conversation.objects.filter(participants = request.user and new_message.recipient)
+    existing_conversation = Conversation.objects.filter(participants = new_message.sender_id).filter(participants=new_message.recipient_id) 
+    # print(existing_conversation.participants)
     if existing_conversation:
       new_message.conversation_id = existing_conversation[0].id
-      print(new_message.conversation_id)
+      # print(new_message.conversation_id)
     else:
       new_conversation = Conversation.objects.create()
       # print(new_conversation)

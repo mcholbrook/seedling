@@ -2,17 +2,23 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-{% if object %}
-  <h1>Edit Your Profile</h1>
-{% else %}
-  <h1>Give us a little more info</h1>
-{% endif %}
-<form action="" method="post">
-  {% csrf_token %}
-  <table>
-    {{form | crispy}}
-  </table>
-  <input class="btn btn-success" type="submit" value="Submit">
-</form>
+<div id='create-profile'>
+  <div id='create-profile-header'>
+    {% if object %}
+      <h1>Edit Your Profile</h1>
+    {% else %}
+      <h1>About You</h1>
+    {% endif %}
+  </div>
+  <div id='create-profile-form'>
+    <form action="" method="post">
+      {% csrf_token %}
+      <table>
+        {{form | crispy}}
+      </table>
+      <input class="btn btn-light" type="submit" value="Submit">
+    </form>
+  </div>
+</div>
 
 {% endblock %}
