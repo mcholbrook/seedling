@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>
-  User Index
-</h1>
-{% for userName in users %}
-<a href="{% url 'users_detail' userName.id %}">{{userName.first_name}}</a>
-{% endfor %}
+<div id="user-index">
+  <div id='user-index-header'>
+    <h1>All Gardeners</h1>
+  </div>
+  <div id='user-index-list'>
+    {% for userName in users %}
+      <a href="{% url 'users_detail' userName.id %}">
+        {% for profile in userName.profile_set.all|slice:":1" %}
+          <img class="profile-image-small" src="../../static/images/{{profile.avatar}}.png" alt="">
+        {% endfor %}
+        {{userName.first_name}}
+      </a>
+      <hr>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}

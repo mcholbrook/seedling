@@ -145,16 +145,12 @@ def messages_create(request):
     new_message = form.save(commit=False)
     new_message.sender_id = request.user.id
     existing_conversation = Conversation.objects.filter(participants = new_message.sender_id).filter(participants=new_message.recipient_id) 
-    # print(existing_conversation.participants)
     if existing_conversation:
       new_message.conversation_id = existing_conversation[0].id
-      # print(new_message.conversation_id)
     else:
       new_conversation = Conversation.objects.create()
-      # print(new_conversation)
       new_conversation.participants.add(request.user.id, new_message.recipient.id)
       new_message.conversation_id = new_conversation.id
-    # print(new_message.conversation_id)
     new_message.save()
     return redirect('conversations_detail', conversation_id=new_message.conversation_id)
   return render(request, 'conversations/create_message.html', context)

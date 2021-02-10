@@ -23,7 +23,7 @@ class SeedCreateForm(ModelForm):
 class NoteCreateForm(ModelForm):
   class Meta:
     model = Note
-    fields = ['date', 'content']
+    fields = ['content']
 
 class MessageCreateForm(ModelForm):
   class Meta:

@@ -2,47 +2,65 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<h1>{{seed.name}}</h1>
-<p>{{seed.description}}</p>
-<img src="../../static/images/{{seed.kind}}.png" />
 
-<div id="seed-details-header">
-  <div id='seed-details-header-container'>
-    <img src="../../static/images/{{seed.kind}}.png" />
-    <div id='seed-details-header-text'>
-      <h3>{{seed.name}}</h3>
+<div class="row">
+  <div id="seed-details-header" class="col">
+      <div id='seed-details-header-container'>
+        <img src="../../static/images/{{seed.kind}}.png" />
+        <div id="seed-details-header-text-important">
+          <h2>{{seed.name}}</h2>
+          <p class="text-muted">{{seed.seed_source}}</p>
+        </div>
+      </div>
+      <div id='seed-details-header-info'>
+        <div id="seed-details-logic">
+          {% if has_seed %}
+            <form action="{% url 'remove_seed' seed.id user.id%}" method="post">
+              {% csrf_token %}
+            <button type='submit' class='btn btn-light'>Remove</button>
+            </form>
+            <form action="{% url 'grow_seed' user.id seed.id%}" method="post">
+              {% csrf_token %}
+            <button type='submit' class='btn btn-light'>Add to Garden</button>
+            </form>
+          {% else %}
+            <form action="{% url 'save_seed' seed.id user.id%}" method="post">
+              {% csrf_token %}
+            <button type='submit' class='btn btn-light'>Save</button>
+            </form>
+          {% endif %}
+          <a href="{% url 'share_seed' seed.id %}" class="btn btn-light">Share</a>
+        </div>
+        <p>{{seed.description}}</p>
+        <p>Days to maturity: {{seed.maturity}}</p>
+        <p>Plant Spacing: {{seed.spacing}}</p>
+        <p>How to grow: {{seed.grow_directions}}</p>
+      </div>
+  </div>
+  
+  <div id='notes' class='col'>
+    <h3>Notes</h3>
+    <div id='note-form'>
+    <form action="{% url 'add_note' seed.id %}" method="post">
+      {% csrf_token %}
+      {{ note_form|crispy}}
+      <input type="submit" class="btn btn-light" value="Add Note">
+    </form>
+    </div>
+    <div id='note-list'>
+      
+        {% for note in seed.note_set.all %}
+          <div>
+            <td>{{note.date}}</td>
+            <br>
+            <td><strong>{{note.user.first_name}}</strong> wrote: </td>
+          <td>{{note.content}}</td>
+          <hr class="col">
+          </div>
+        {% endfor %}
+      
     </div>
   </div>
+  
 </div>
-
-<div id="seed-detail-logic">
-  {% if has_seed %}
-    <form action="{% url 'remove_seed' seed.id user.id%}" method="post">
-      {% csrf_token %}
-    <button type='submit' class='btn btn-light'>Remove Seed</button>
-    </form>
-    <form action="{% url 'grow_seed' user.id seed.id%}" method="post">
-      {% csrf_token %}
-    <button type='submit' class='btn btn-light'>Add Seed to Your Garden</button>
-    </form>
-  {% else %}
-    <form action="{% url 'save_seed' seed.id user.id%}" method="post">
-      {% csrf_token %}
-    <button type='submit' class='btn btn-light'>Save Seed</button>
-    </form>
-  {% endif %}
-</div>
-
-<a href="{% url 'share_seed' seed.id %}" class="btn btn-light">Share</a>
-
-<form action="{% url 'add_note' seed.id %}" method="post">
-  {% csrf_token %}
-  {{ note_form|crispy}}
-  <input type="submit" class="btn btn-success" value="Add Note">
-</form>
-{% for note in seed.note_set.all %}
-{{note.date}}
-{{note.content}}
-{{note.user.username}}
-{% endfor %}
 {% endblock %}
