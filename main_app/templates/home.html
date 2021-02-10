@@ -4,7 +4,12 @@
   <div id="home-page">
     <div id="welcome">
       {% if user.is_authenticated %}
-      <p>Welcome, {{user.first_name}}</p>
+      {% for profile in user.profile_set.all|slice:":1" %}
+          <img class="profile-image" src="../../static/images/{{profile.avatar}}.png" alt="">
+          <h3>Welcome, {{user.first_name}}!</h3>
+        {% endfor %}
+      {% else %}
+      <h3>Welcome to seedling!</h3>
       {% endif %}
     </div>
   </div>

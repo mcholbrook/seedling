@@ -4,17 +4,21 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
 from .models import Profile, User, Seed, Note, Conversation, Message, Garden, Todo
 from .forms import UserForm, SeedCreateForm, NoteCreateForm, MessageCreateForm, ReplyForm, TodoForm
-# from PIL import Image
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 
 def home(request):
   return render(request, 'home.html')
 
+@login_required
 def users_index(request):
   users = User.objects.all()
   print(users)
   return render(request, 'users/index.html', {'users': users})
 
+@login_required
 def users_detail(request, userName_id):
   userWhoOwnsProfile = User.objects.get(id=userName_id)
   profile = Profile.objects.get(user=userName_id)
@@ -28,6 +32,7 @@ def users_detail(request, userName_id):
     is_friend = False
   return render(request, 'users/detail.html', { 'userAssociatedWithProfile': userWhoOwnsProfile, 'profile': profile, 'is_friend':is_friend, 'friends': friends })
 
+@login_required
 def add_friend(request, profile_id, otheruser_id):
   friend = Profile.objects.get(id=profile_id)
   currentUser = Profile.objects.get(user_id=otheruser_id)
@@ -35,6 +40,7 @@ def add_friend(request, profile_id, otheruser_id):
   currentUser.friends.add(friend)
   return redirect('users_detail', userName_id=friend.user_id)
 
+@login_required
 def delete_friend(request, profile_id, otheruser_id):
   friend = Profile.objects.get(id=profile_id)
   currentUser = Profile.objects.get(user_id=otheruser_id)
@@ -78,11 +84,12 @@ class ProfileCreate(CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-class ProfileUpdate(UpdateView):
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
   model = Profile
   fields = ['bio', 'avatar', 'zone']
   # success_url = '/'
 
+@login_required
 def seed_create(request):
   form = SeedCreateForm(request.POST)
   context = {'form': form}
@@ -92,10 +99,12 @@ def seed_create(request):
     return redirect('/seeds/')
   return render(request, 'main_app/seed_form.html', context)
 
+@login_required
 def seed_list(request):
   seeds = Seed.objects.all()
   return render(request, 'seeds/index.html', {'seeds': seeds})
 
+@login_required
 def seeds_detail(request, seed_id):
   seed = Seed.objects.get(id=seed_id)
   note_form = NoteCreateForm()
@@ -108,6 +117,7 @@ def seeds_detail(request, seed_id):
   # does_user_have_seed = User.objects.get(id=request.user.id)
   return render(request, 'seeds/detail.html', {'seed': seed, 'note_form': note_form, 'has_seed': has_seed})
 
+@login_required
 def add_note(request, seed_id):
   form = NoteCreateForm(request.POST)
   if form.is_valid():
@@ -118,26 +128,31 @@ def add_note(request, seed_id):
     new_note.save()
   return redirect('seeds_detail', seed_id=seed_id)
 
+@login_required
 def save_seed(request, seed_id, user_id):
   Seed.objects.get(id=seed_id).users.add(user_id)
   return redirect('seeds_detail', seed_id=seed_id)
 
+@login_required
 def remove_seed(request, seed_id, user_id):
   Seed.objects.get(id=seed_id).users.remove(user_id)
   print(f'You removed user {user_id} from this seed: {seed_id}')
   return redirect('seeds_detail', seed_id=seed_id)
 
+@login_required
 def conversations_index(request):
   conversations = Conversation.objects.filter(participants=request.user)
   print(conversations)
   return render(request, 'conversations/index.html', {'conversations': conversations})
 
+@login_required
 def conversations_detail(request, conversation_id):
   conversation = Conversation.objects.get(id=conversation_id)
   print(conversation)
   reply_form = ReplyForm()
   return render(request, 'conversations/detail.html', {'conversation': conversation, 'reply_form': reply_form})
 
+@login_required
 def messages_create(request):
   form = MessageCreateForm(request.POST)
   context = {'form': form}
@@ -155,6 +170,7 @@ def messages_create(request):
     return redirect('conversations_detail', conversation_id=new_message.conversation_id)
   return render(request, 'conversations/create_message.html', context)
 
+@login_required
 def conversations_reply(request, conversation_id):
   form = ReplyForm(request.POST)
   if form.is_valid():
@@ -168,6 +184,7 @@ def conversations_reply(request, conversation_id):
     new_message.save()
   return redirect('conversations_detail', conversation_id=conversation_id)
 
+@login_required
 def share_seed(request, seed_id):
   form = MessageCreateForm(request.POST)
   seed = Seed.objects.get(id=seed_id)
@@ -189,6 +206,7 @@ def share_seed(request, seed_id):
     return redirect('conversations_detail', conversation_id=new_message.conversation_id)
   return render(request, 'conversations/create_message.html', context)
 
+@login_required
 def garden_detail(request, user_id):
   garden = Garden.objects.get(user_id=user_id)
   todos = Todo.objects.filter(user_id=user_id)
@@ -197,6 +215,7 @@ def garden_detail(request, user_id):
   todo_form = TodoForm()
   return render(request, 'garden/details.html', {'garden': garden, 'todos': todos, 'todo_form': todo_form, 'seeds': seeds})
 
+@login_required
 def add_todo(request, garden_id):
   form = TodoForm(request.POST)
   if form.is_valid():
@@ -206,10 +225,12 @@ def add_todo(request, garden_id):
     new_todo.save()
   return redirect('garden_detail', user_id=request.user.id)
 
+@login_required
 def delete_todo(request, garden_id, todo_id):
   Todo.objects.filter(id=todo_id).delete()
   return redirect('garden_detail', user_id=request.user.id)
 
+@login_required
 def grow_seed(request, user_id, seed_id):
   garden = Garden.objects.get(user_id=user_id)
   garden.seeds.add(seed_id)

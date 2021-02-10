@@ -11,7 +11,7 @@
 </head>
 <body>
   <header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: rgb(110, 168, 110)">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #507A4F">
       <a class="navbar-brand" style="color: white" href="/">seedling</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,11 +20,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'garden_detail' user.id %}">My Garden</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'seeds_create' %}">Add Seeds</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'seeds_list' %}">All Seeds</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'conversations_index' %}">Inbox</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'garden_detail' user.id %}">My Garden</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               More
@@ -42,7 +41,6 @@
             </div>
           </li>
           {% else %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Log In</a></li>
           {% endif %}

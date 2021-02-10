@@ -56,15 +56,15 @@ h1, h2, h3 {
 }
 
 #welcome {
-  background-color:rgb(110, 168, 110);
-  border-radius: 50%;
+  /* background-color: #507A4F; */
+  /* border-radius: 50%; */
   width: 200px;
-  height: 200px;
+  height: 400px;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
-  color: white;
+  /* color: white; */
 }
 
 /* Styling for seed index page  */
@@ -112,11 +112,12 @@ h1, h2, h3 {
 /* Styling for seed create form */
 
 #seed-create{
-  background-image: url('../images/background.jpg');
+  background-image: url('../images/background4.jpg');
   background-size:contain;
   background-repeat: no-repeat;
   background-position: top right;
   height: 100vh;
+  margin-right: 80px;
 }
 
 #seed-create-header{
@@ -219,7 +220,6 @@ h1, h2, h3 {
   border-radius: 5px;
 }
 
-
 /* Styling for inbox and conversation details */
 
 #inbox a{
@@ -249,12 +249,14 @@ h1, h2, h3 {
 
 .their-message{
   float: left;
-  background-color: rgb(110, 168, 110);
+  /* background-color: rgb(110, 168, 110); */
+  background-color: #507A4F;
   border-radius: 7px;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
   margin: 5px;
+  color: white;
 }
 
 #message-reply{
@@ -268,7 +270,8 @@ h1, h2, h3 {
 }
 
 .fixed-bottom {
-  background-color: rgb(110, 168, 110);
+  /* background-color: rgb(110, 168, 110); */
+  background-color: #507A4F;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -341,7 +344,8 @@ h1, h2, h3 {
 
 .profile-image{
   border-radius: 50%;
-  background-color: rgb(145, 196, 68);
+  /* background-color: rgb(145, 196, 68); */
+  background-color: #F18F01;
   height: 200px;
   padding: 5px;
   margin: 10px;
@@ -349,7 +353,8 @@ h1, h2, h3 {
 
 .profile-image-small{
   border-radius: 50%;
-  background-color: rgb(145, 196, 68);
+  /* background-color: rgb(145, 196, 68); */
+  background-color: #F18F01;
   height: 45px;
   padding: 2px;
   margin: 10px;
@@ -357,7 +362,8 @@ h1, h2, h3 {
 
 .profile-image-med{
   border-radius: 50%;
-  background-color: rgb(145, 196, 68);
+  /* background-color: rgb(145, 196, 68); */
+  background-color: #F18F01;
   height: 60px;
   padding: 2px;
   margin: 10px;
