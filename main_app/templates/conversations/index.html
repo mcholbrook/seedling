@@ -1,29 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div id="inbox-header">
-  <h1>Inbox</h1>
-  <a class="btn btn-light" href="{% url 'messages_create' %}">New Message</a>
-  </div>
-  
-  <div id="inbox">
-  {% if conversations.count == 0 %}
-  <p>No messages yet!</p>
-  <hr>
-  {% else %}
-  {% for conversation in conversations %}
-    <a class="inbox-message" href="{% url 'conversations_detail' conversation.id %}">
-      {% for participant in conversation.participants.all %}
-        {% if participant.id != user.id %}
-          <p><b>{{participant.first_name}}</b></p>
-        {% endif %}
-      {% endfor %}
-      {% for message in conversation.message_set.all|slice:":1" %}
-      <p class="text-muted">{{message.content}}</p>
-      {% endfor %}
-    </a>
-    <hr>
-  {% endfor %}
-  {% endif %}
+  <div id='inbox-page'>
+    <div id="inbox-header">
+      <h1>Inbox</h1>
+      <a class="btn btn-light" href="{% url 'messages_create' %}">New Message</a>
+    </div>
+    <div id="inbox">
+      {% if conversations.count == 0 %}
+        <p>No messages yet!</p>
+        <hr>
+      {% else %}
+        {% for conversation in conversations %}
+          <a class="inbox-message" href="{% url 'conversations_detail' conversation.id %}">
+            {% for participant in conversation.participants.all %}
+              {% if participant.id != user.id %}
+                <p><b>{{participant.first_name}}</b></p>
+              {% endif %}
+            {% endfor %}
+            {% for message in conversation.message_set.all|slice:":1" %}
+            <p class="text-muted">{{message.content}}</p>
+            {% endfor %}
+          </a>
+          <hr>
+        {% endfor %}
+      {% endif %}
+    </div>
   </div>
 {% endblock %}

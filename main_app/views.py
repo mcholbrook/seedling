@@ -177,7 +177,7 @@ def share_seed(request, seed_id):
     new_message.sender_id = request.user.id
     if seed_id:
       new_message.seed_id = seed_id
-    existing_conversation = Conversation.objects.filter(participants = request.user and new_message.recipient)
+    existing_conversation = Conversation.objects.filter(participants = new_message.sender_id).filter(participants=new_message.recipient_id) 
     if existing_conversation:
       new_message.conversation_id = existing_conversation[0].id
       print(new_message.conversation_id)

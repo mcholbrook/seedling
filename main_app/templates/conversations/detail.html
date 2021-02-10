@@ -21,6 +21,7 @@
         <p>{{message.content}}</p>
           {% if message.seed %}
           <div class="card mb-3 cardModule" style="max-width: 540px;">
+            <a class="no-decoration" href="{% url 'seeds_detail' message.seed.id %}">
             <div class="row no-gutters">
               <div class="col-6">
                 <div class="card-body">
@@ -28,7 +29,6 @@
                   {% if message.seed.seed_source %}
                   <p class="card-text seed-source"><small class="text-muted">{{message.seed.seed_source}}</small></p>
                   {% endif %}
-                  <a class="card-text" href="{% url 'seeds_detail' message.seed.id %}"><small>Details</small></a>
                   <div id="card-description">
                     <p class="card-text line-clamp">{{message.seed.description}}</p>
                   </div>
@@ -38,6 +38,7 @@
                 <img src="../../static/images/{{message.seed.kind}}.png">
               </div>
             </div>
+          </a>
           </div>
           {% endif %}
         </div>

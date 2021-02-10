@@ -2,42 +2,38 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-
-<div id='create-message'>
-  <div id='create-message-header'>
-    <h1>New Message</h1>
-  </div>
-
-  {% if seed %}
-  <div class="card mb-3 cardModule" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-6">
-        <div class="card-body">
-          <h5 class="card-title">{{seed.name}}</h5>
-          {% if seed.seed_source %}
-          <p class="card-text seed-source"><small class="text-muted">{{seed.seed_source}}</small></p>
-          {% endif %}
-          <a class="card-text" href="{% url 'seeds_detail' seed.id %}"><small>Details</small></a>
-          <div id="card-description">
-            <p class="card-text line-clamp">{{seed.description}}</p>
+  <div id='create-message'>
+    <div id='create-message-header'>
+      <h1>New Message</h1>
+    </div>
+    {% if seed %}
+      <div class="card mb-3 cardModule" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-6">
+            <div class="card-body">
+              <h5 class="card-title">{{seed.name}}</h5>
+              {% if seed.seed_source %}
+              <p class="card-text seed-source"><small class="text-muted">{{seed.seed_source}}</small></p>
+              {% endif %}
+              <div id="card-description">
+                <p class="card-text line-clamp">{{seed.description}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <img src="{% static 'images/'|add:seed.kind|add:'.png' %}">
           </div>
         </div>
       </div>
-      <div class="col-6">
-        <img src="{% static 'images/'|add:seed.kind|add:'.png' %}">
-      </div>
+    {% endif %}
+    <div id='create-message-form'>
+      <form action="" method="post">
+        {% csrf_token %}
+        <table>
+          {{form|crispy}}
+        </table>
+        <input class="btn btn-light" type="submit" value="Submit">
+      </form>
     </div>
   </div>
-  {% endif %}
-
-  <div id='create-message-form'>
-    <form action="" method="post">
-      {% csrf_token %}
-      <table>
-        {{form|crispy}}
-      </table>
-      <input class="btn btn-light" type="submit" value="Submit">
-    </form>
-  </div>
-</div>
 {% endblock %}

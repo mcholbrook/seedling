@@ -41,7 +41,8 @@
       </div>
       {% if userAssociatedWithProfile.seed_set.count %}
         {% for seed in userAssociatedWithProfile.seed_set.all %}
-          <div class="card mb-3 cardModule" id="seed-card" style="max-width: 540px;">
+        <div class="card mb-3 cardModule" id="seed-card" style="max-width: 540px;">
+          <a class="no-decoration" href="{% url 'seeds_detail' seed.id %}">
             <div class="row no-gutters">
               <div class="col-6">
                 <div class="card-body">
@@ -49,7 +50,6 @@
                   {% if seed.seed_source %}
                   <p class="card-text seed-source"><small class="text-muted">{{seed.seed_source}}</small></p>
                   {% endif %}
-                  <a class="card-text" href="{% url 'seeds_detail' seed.id %}"><small>Details</small></a>
                   <div id="card-description">
                     <p class="card-text line-clamp">{{seed.description}}</p>
                   </div>
@@ -59,6 +59,7 @@
                 <img src="../../static/images/{{seed.kind}}.png" alt="...">
               </div>
             </div>
+          </a>
           </div>
         {% endfor %}
       {% endif %}

@@ -18,6 +18,16 @@ h1, h2, h3 {
   font-family: 'Montserrat', sans-serif;
 }
 
+.no-decoration{
+  color: black;
+  text-decoration: none;
+}
+
+.no-decoration :hover{
+  color: black;
+  text-decoration: none;
+}
+
 /* Styling for sign up form and log in */
 
 #signup{
@@ -82,7 +92,7 @@ h1, h2, h3 {
 
 .line-clamp {
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
@@ -101,8 +111,16 @@ h1, h2, h3 {
 
 /* Styling for seed create form */
 
+#seed-create{
+  background-image: url('../images/background.jpg');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: top right;
+  height: 100vh;
+}
+
 #seed-create-header{
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 20px;
 }
 
@@ -276,6 +294,14 @@ h1, h2, h3 {
   display: inline-block;
   margin-top: 20px;
   width: 50%;
+}
+
+#inbox-page{
+  background-image: url('../images/background.jpg');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: top right;
+  height: 100vh;
 }
 
 #inbox-header h1{
