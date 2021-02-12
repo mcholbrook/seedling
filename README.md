@@ -28,4 +28,5 @@ See the planning phase [here](https://trello.com/b/pAEZfukI/seedling).
 ### **Future Enhancements**
 * Ability to drag and drop crops onto your garden plan
 * Ability to upload photos of a crop to your seed library
+* Ability to set garden to public or private
 
