@@ -4,8 +4,6 @@ Seedling is an app built to help gardeners plan their gardens, keep track of see
 
 I have a veggie garden every year, and the process of planning out the beds, researching, and ordering seeds is a total mood-booster through the winter months! I built this app to start keeping a record of seed varieties I love, crop placement for better crop rotation, and grow methods that work well for me. 
 
-Visit Seedling [here](https://theseedlingapp.herokuapp.com/)!
-
 ## Take a look at Seedling!
 
 ![](https://i.imgur.com/EdQaPUM.png)
